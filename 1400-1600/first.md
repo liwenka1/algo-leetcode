@@ -57,3 +57,22 @@ var findSolution = function (customfunction, z) {
   return ans;
 };
 ```
+
+# 3101. 交替子数组计数
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var countAlternatingSubarrays = function (nums) {
+  let ans = 1;
+  for (let start = 0, end = 1; end < nums.length; end++) {
+    if (nums[end] === nums[end - 1]) {
+      start = end;
+    }
+    ans += end - start + 1;
+  }
+  return ans;
+};
+```
