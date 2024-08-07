@@ -76,3 +76,25 @@ var countAlternatingSubarrays = function (nums) {
   return ans;
 };
 ```
+
+# 2734. 执行子串操作后的字典序最小字符串
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var smallestString = function (s) {
+  const list = s.split("");
+  const n = list.length;
+  for (let i = 0; i < n; i++) {
+    if (list[i] === "a") continue;
+    for (let j = i; j < n && list[j] !== "a"; j++) {
+      list[j] = String.fromCharCode(list[j].charCodeAt(0) - 1);
+    }
+    return list.join("");
+  }
+  list[n - 1] = "z";
+  return list.join("");
+};
+```
