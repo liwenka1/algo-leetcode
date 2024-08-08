@@ -98,3 +98,24 @@ var smallestString = function (s) {
   return list.join("");
 };
 ```
+
+# 2996. 大于等于顺序前缀和的最小缺失整数
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingInteger = function (nums) {
+  let sum = nums[0];
+  const n = nums.length;
+  for (let i = 1; i < n, nums[i] === nums[i - 1] + 1; i++) {
+    sum += nums[i];
+  }
+  const set = new Set(nums);
+  while (set.has(sum)) {
+    sum++;
+  }
+  return sum;
+};
+```
