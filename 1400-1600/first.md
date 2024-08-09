@@ -119,3 +119,24 @@ var missingInteger = function (nums) {
   return sum;
 };
 ```
+
+# 2946. 循环移位后的矩阵相似检查
+
+```js
+/**
+ * @param {number[][]} mat
+ * @param {number} k
+ * @return {boolean}
+ */
+var areSimilar = function (mat, k) {
+    const n = mat[0].length
+    k %= n;
+    if (k === 0) return true;
+    for (const num of mat) {
+        for (let i = 0; i < n; i++) {
+            if (num[i] !== num[(i + k) % n]) return false;
+        }
+    }
+    return true;
+};
+```
