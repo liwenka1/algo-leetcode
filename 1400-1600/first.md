@@ -140,3 +140,23 @@ var areSimilar = function (mat, k) {
     return true;
 };
 ```
+
+# 2744. 最大字符串配对数目
+
+```js
+/**
+ * @param {string[]} words
+ * @return {number}
+ */
+var maximumNumberOfStringPairs = function (words) {
+  const set = new Set();
+  let ans = 0;
+  for (const word of words) {
+    if (set.has(word.split("").reverse().join(""))) {
+      ans++;
+    }
+    set.add(word);
+  }
+  return ans;
+};
+```
