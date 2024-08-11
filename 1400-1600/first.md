@@ -160,3 +160,34 @@ var maximumNumberOfStringPairs = function (words) {
   return ans;
 };
 ```
+
+# 2451. 差值数组不同的字符串
+
+```js
+/**
+ * @param {string[]} words
+ * @return {string}
+ */
+var oddString = function (words) {
+  const map = new Map();
+  for (const word of words) {
+    const keys = word.split("").map((s) => s.charCodeAt(0));
+    const n = keys.length;
+    const res = [];
+    for (let i = 1; i < n; i++) {
+      res.push(keys[i] - keys[i - 1]);
+    }
+    const keyString = res.join(",");
+    if (!map.has(keyString)) {
+      map.set(keyString, []);
+    }
+    map.get(keyString).push(word);
+  }
+  for (const group of map.values()) {
+    if (group.length === 1) {
+      return group[0];
+    }
+  }
+  return "";
+};
+```
