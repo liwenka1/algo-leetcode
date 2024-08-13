@@ -230,3 +230,26 @@ var findRotation = function (mat, target) {
   return false;
 };
 ```
+
+# 2110. 股票平滑下跌阶段的数目
+
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var getDescentPeriods = function (prices) {
+  let ans = 1;
+  let prew = 1;
+  const n = prices.length;
+  for (let i = 1; i < n; i++) {
+    if (prices[i - 1] - prices[i] === 1) {
+      prew++;
+    } else {
+      prew = 1;
+    }
+    ans += prew;
+  }
+  return ans;
+};
+```
