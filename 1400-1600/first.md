@@ -253,3 +253,28 @@ var getDescentPeriods = function (prices) {
   return ans;
 };
 ```
+
+# 2834. 找出美丽数组的最小和
+
+```js
+/**
+ * @param {number} n
+ * @param {number} target
+ * @return {number}
+ */
+var minimumPossibleSum = function (n, target) {
+  const mod = BigInt(1000000007);
+  const nBig = BigInt(n);
+  const targetBig = BigInt(target);
+  const m = targetBig / 2n;
+
+  if (nBig <= m) {
+    return Number((((1n + nBig) * nBig) / 2n) % mod);
+  }
+
+  const sum1 = ((1n + m) * m) / 2n;
+  const sum2 = ((targetBig * 2n + nBig - m - 1n) * (nBig - m)) / 2n;
+
+  return Number((sum1 + sum2) % mod);
+};
+```
