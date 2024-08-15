@@ -278,3 +278,28 @@ var minimumPossibleSum = function (n, target) {
   return Number((sum1 + sum2) % mod);
 };
 ```
+
+# 1138. 字母板上的路径
+
+```js
+/**
+ * @param {string} target
+ * @return {string}
+ */
+var alphabetBoardPath = function (target) {
+  let x = 0;
+  let y = 0;
+  const ans = [];
+  for (const s of target) {
+    const n = s.charCodeAt(0) - "a".charCodeAt(0);
+    const nx = n % 5;
+    const ny = Math.floor(n / 5);
+    const v = nx > x ? "R".repeat(nx - x) : "L".repeat(x - nx);
+    const h = ny > y ? "D".repeat(ny - y) : "U".repeat(y - ny);
+    x = nx;
+    y = ny;
+    ans.push(s === "z" ? v + h + "!" : h + v + "!");
+  }
+  return ans.join("");
+};
+```
