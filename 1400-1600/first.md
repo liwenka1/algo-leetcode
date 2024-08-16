@@ -303,3 +303,36 @@ var alphabetBoardPath = function (target) {
   return ans.join("");
 };
 ```
+
+# 3121. 统计特殊字母的数量 II
+
+```js
+/**
+ * @param {string} word
+ * @return {number}
+ */
+var numberOfSpecialChars = function (word) {
+  const ans = new Set(),
+    delSet = new Set(),
+    upSet = new Set(),
+    lowSet = new Set();
+  word = word.split("");
+  for (const s of word) {
+    if (s === s.toUpperCase()) {
+      if (lowSet.has(s.toLowerCase())) {
+        ans.add(s);
+      }
+      upSet.add(s);
+    } else {
+      if (upSet.has(s.toUpperCase())) {
+        if (lowSet.has(s)) {
+          delSet.add(s);
+        }
+      } else {
+        lowSet.add(s);
+      }
+    }
+  }
+  return ans.size - delSet.size;
+};
+```
