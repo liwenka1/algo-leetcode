@@ -336,3 +336,30 @@ var numberOfSpecialChars = function (word) {
   return ans.size - delSet.size;
 };
 ```
+
+# 2521. 数组乘积中的不同质因数数目
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var distinctPrimeFactors = function (nums) {
+  const ans = new Set();
+  for (const num of nums) {
+    let i = 2;
+    let x = num;
+    while (i * i <= x) {
+      if (x % i === 0) {
+        ans.add(i);
+        while (x % i === 0) {
+          x /= i;
+        }
+      }
+      i++;
+    }
+    if (x > 1) ans.add(x);
+  }
+  return ans.size;
+};
+```
