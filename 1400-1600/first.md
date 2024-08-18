@@ -363,3 +363,33 @@ var distinctPrimeFactors = function (nums) {
   return ans.size;
 };
 ```
+
+# 2383. 赢得比赛需要的最少训练时长
+
+```js
+/**
+ * @param {number} initialEnergy
+ * @param {number} initialExperience
+ * @param {number[]} energy
+ * @param {number[]} experience
+ * @return {number}
+ */
+var minNumberOfHours = function (
+  initialEnergy,
+  initialExperience,
+  energy,
+  experience
+) {
+  const energySum = energy.reduce((a, b) => a + b);
+  let requiredEnergy = Math.max(0, energySum - initialEnergy + 1);
+  let requiredExperience = 0;
+  for (const e of experience) {
+    if (initialExperience <= e) {
+      requiredExperience += e + 1 - initialExperience;
+      initialExperience = e + 1;
+    }
+    initialExperience += e;
+  }
+  return requiredEnergy + requiredExperience;
+};
+```
