@@ -393,3 +393,22 @@ var minNumberOfHours = function (
   return requiredEnergy + requiredExperience;
 };
 ```
+
+# 1985. 找出数组中的第 K 大整数
+
+```js
+/**
+ * @param {string[]} nums
+ * @param {number} k
+ * @return {string}
+ */
+var kthLargestNumber = function (nums, k) {
+  const newNums = nums.map((i) => BigInt(i));
+  newNums.sort((a, b) => {
+    if (a > b) return -1;
+    if (a < b) return 1;
+    return 0;
+  });
+  return newNums[k - 1].toString();
+};
+```
