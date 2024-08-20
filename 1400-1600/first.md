@@ -412,3 +412,25 @@ var kthLargestNumber = function (nums, k) {
   return newNums[k - 1].toString();
 };
 ```
+
+# 2825. 循环增长使字符串子序列等于另一个字符串
+
+```js
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {boolean}
+ */
+var canMakeSubsequence = function (str1, str2) {
+  if (str1.length < str2.length) return false;
+  let i = 0;
+  for (const s of str1) {
+    const c = s === "z" ? "a" : String.fromCharCode(s.charCodeAt(0) + 1);
+    if (s === str2[i] || c === str2[i]) {
+      i++;
+      if (i === str2.length) return true;
+    }
+  }
+  return false;
+};
+```
