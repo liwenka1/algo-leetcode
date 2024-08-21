@@ -434,3 +434,26 @@ var canMakeSubsequence = function (str1, str2) {
   return false;
 };
 ```
+
+# 2294. 划分数组使最大差为 K
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var partitionArray = function (nums, k) {
+  nums.sort((a, b) => a - b);
+  let start = nums[0];
+  let ans = 1;
+  const n = nums.length;
+  for (let i = 1; i < n; i++) {
+    if (nums[i] - start > k) {
+      ans++;
+      start = nums[i];
+    }
+  }
+  return ans;
+};
+```
