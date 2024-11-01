@@ -145,3 +145,45 @@ var numTrees = function (n) {
   return dp[n];
 };
 ```
+
+```js
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var numTrees = function (n) {
+  const dp = new Array(n + 1).fill(0);
+  dp[0] = 1;
+  dp[1] = 1;
+  for (let i = 2; i <= n; i++) {
+    for (let j = 1; j <= i; j++) {
+      dp[i] += dp[j - 1] * dp[i - j];
+    }
+  }
+  return dp[n];
+};
+```
+
+# 416. 分割等和子集
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canPartition = function (nums) {
+  const sum = nums.reduce((a, b) => a + b);
+  if (sum % 2 !== 0) {
+    return false;
+  }
+  const target = sum / 2;
+  const n = nums.length;
+  const dp = new Array(target + 1).fill(0);
+  for (let i = 0; i < n; i++) {
+    for (let j = target; j >= nums[i]; j--) {
+      dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+    }
+  }
+  return dp[target] === target;
+};
+```
