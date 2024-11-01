@@ -234,3 +234,34 @@ var findTargetSumWays = function (nums, target) {
   return dp[bagSize];
 };
 ```
+
+# 474. 一和零
+
+```js
+/**
+ * @param {string[]} strs
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var findMaxForm = function (strs, m, n) {
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+  for (const str of strs) {
+    let x = 0;
+    let y = 0;
+    for (const ch of str) {
+      if (ch === "0") {
+        x++;
+      } else {
+        y++;
+      }
+    }
+    for (let i = m; i >= x; i--) {
+      for (let j = n; j >= y; j--) {
+        dp[i][j] = Math.max(dp[i][j], dp[i - x][j - y] + 1);
+      }
+    }
+  }
+  return dp[m][n];
+};
+```
