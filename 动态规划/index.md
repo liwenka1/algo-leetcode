@@ -78,3 +78,31 @@ var uniquePaths = function (m, n) {
   return dp[n - 1][m - 1];
 };
 ```
+
+# 63. 不同路径 II
+
+```js
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles = function (obstacleGrid) {
+  const n = obstacleGrid.length;
+  const m = obstacleGrid[0].length;
+  const dp = Array.from({ length: n }, () => new Array(m).fill(0));
+  for (let i = 0; i < n && obstacleGrid[i][0] === 0; i++) {
+    dp[i][0] = 1;
+  }
+  for (let j = 0; j < m && obstacleGrid[0][j] === 0; j++) {
+    dp[0][j] = 1;
+  }
+  for (let i = 1; i < n; i++) {
+    for (let j = 1; j < m; j++) {
+      if (obstacleGrid[i][j] === 0) {
+        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+      }
+    }
+  }
+  return dp[n - 1][m - 1];
+};
+```
