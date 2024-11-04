@@ -417,3 +417,37 @@ var rob = function (nums) {
   return Math.max(fn(nums.slice(0, n - 1)), fn(nums.slice(1, n)));
 };
 ```
+
+# 337. 打家劫舍 III
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var rob = function (root) {
+  const fn = (cur) => {
+    if (cur === null) {
+      return [0, 0];
+    }
+
+    const left = fn(cur.left);
+    const right = fn(cur.right);
+
+    const v1 = Math.max(...left) + Math.max(...right);
+    const v2 = cur.val + left[0] + right[0];
+
+    return [v1, v2];
+  };
+
+  return Math.max(...fn(root));
+};
+```
