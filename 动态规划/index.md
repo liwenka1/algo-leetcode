@@ -349,3 +349,27 @@ var numSquares = function (n) {
   return dp[n];
 };
 ```
+
+# 139. 单词拆分
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function (s, wordDict) {
+  const n = s.length;
+  const dp = new Array(n + 1).fill(false);
+  dp[0] = true;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 0; j < i; j++) {
+      const word = s.substring(j, i);
+      if (wordDict.includes(word) && dp[j]) {
+        dp[i] = true;
+      }
+    }
+  }
+  return dp[n];
+};
+```
