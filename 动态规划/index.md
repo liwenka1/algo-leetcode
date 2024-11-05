@@ -865,3 +865,32 @@ var minDistance = function (word1, word2) {
   return dp[n][m];
 };
 ```
+
+# 647. 回文子串
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function (s) {
+  const n = s.length;
+  const dp = Array.from({ length: n }, () => new Array(n).fill(false));
+  let ans = 0;
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = i; j < n; j++) {
+      if (s[i] === s[j]) {
+        if (j - i <= 1) {
+          dp[i][j] = true;
+        } else {
+          dp[i][j] = dp[i + 1][j - 1];
+        }
+        if (dp[i][j]) {
+          ans++;
+        }
+      }
+    }
+  }
+  return ans;
+};
+```
