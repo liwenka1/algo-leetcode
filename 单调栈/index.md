@@ -22,3 +22,33 @@ var dailyTemperatures = function (temperatures) {
   return ans;
 };
 ```
+
+# 496. 下一个更大元素 I
+
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function (nums1, nums2) {
+  const map = new Map();
+  for (const i in nums1) {
+    map.set(nums1[i], i);
+  }
+  const m = nums1.length;
+  const n = nums2.length;
+  const stack = [0];
+  const ans = new Array(m).fill(-1);
+  for (let i = 1; i < n; i++) {
+    while (stack.length && nums2[i] > nums2[stack[stack.length - 1]]) {
+      const j = stack.pop();
+      if (map.has(nums2[j])) {
+        ans[map.get(nums2[j])] = nums2[i];
+      }
+    }
+    stack.push(i);
+  }
+  return ans;
+};
+```
