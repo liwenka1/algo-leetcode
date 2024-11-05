@@ -894,3 +894,32 @@ var countSubstrings = function (s) {
   return ans;
 };
 ```
+
+# 516. 最长回文子序列
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindromeSubseq = function (s) {
+  const n = s.length;
+  const dp = Array.from({ length: n }, () => new Array(n).fill(0));
+  let ans = 0;
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = i; j < n; j++) {
+      if (s[i] === s[j]) {
+        if (j - i <= 1) {
+          dp[i][j] = j - i + 1;
+        } else {
+          dp[i][j] = dp[i + 1][j - 1] + 2;
+        }
+      } else {
+        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+      }
+      ans = Math.max(ans, dp[i][j]);
+    }
+  }
+  return ans;
+};
+```
