@@ -739,3 +739,31 @@ var maxSubArray = function (nums) {
   return Math.max(...dp);
 };
 ```
+
+# 392. 判断子序列
+
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isSubsequence = function (s, t) {
+  const n = s.length;
+  const m = t.length;
+  if (n === 0) {
+    return true;
+  }
+  const dp = Array.from({ length: n + 1 }, () => new Array(m).fill(0));
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= m; j++) {
+      if (s[i - 1] === t[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = dp[i][j - 1];
+      }
+    }
+  }
+  return dp[n][m] === n;
+};
+```
