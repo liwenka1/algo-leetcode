@@ -513,3 +513,30 @@ var maxProfit = function (prices) {
   return Math.max(...dp[n - 1]);
 };
 ```
+
+# 188. 买卖股票的最佳时机 IV
+
+```js
+/**
+ * @param {number} k
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (k, prices) {
+  const n = prices.length;
+  const m = 2 * k + 1;
+  const dp = Array.from({ length: n }, () => new Array(m).fill(0));
+  for (let j = 1; j < m; j += 2) {
+    dp[0][j] = -prices[0];
+  }
+  for (let i = 1; i < n; i++) {
+    for (let j = 1; j < m; j++) {
+      dp[i][j] = Math.max(
+        dp[i - 1][j],
+        dp[i - 1][j - 1] + (j % 2 === 0 ? prices[i] : -prices[i])
+      );
+    }
+  }
+  return Math.max(...dp[n - 1]);
+};
+```
