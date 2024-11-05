@@ -629,3 +629,20 @@ var findLengthOfLCIS = function (nums) {
   return Math.max(...dp);
 };
 ```
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findLengthOfLCIS = function (nums) {
+  const n = nums.length;
+  const dp = new Array(n).fill(1);
+  for (let i = 1; i < n; i++) {
+    if (nums[i] > nums[i - 1]) {
+      dp[i] = dp[i - 1] + 1;
+    }
+  }
+  return Math.max(...dp);
+};
+```
