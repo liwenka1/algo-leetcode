@@ -608,3 +608,24 @@ var lengthOfLIS = function (nums) {
   return Math.max(...dp);
 };
 ```
+
+# 674. 最长连续递增序列
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findLengthOfLCIS = function (nums) {
+  const n = nums.length;
+  const dp = new Array(n).fill(1);
+  for (let i = 1; i < n; i++) {
+    for (let j = i - 1; j >= 0 && nums[j + 1] > nums[j]; j--) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+      }
+    }
+  }
+  return Math.max(...dp);
+};
+```
