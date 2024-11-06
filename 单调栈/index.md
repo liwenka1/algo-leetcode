@@ -88,12 +88,40 @@ var trap = function (height) {
   let ans = 0;
   for (let i = 1; i < n; i++) {
     while (stack.length && height[i] > height[stack[stack.length - 1]]) {
-      const j = stack.pop();
+      const mid = stack.pop();
       if (stack.length) {
-        const k = stack[stack.length - 1];
-        const h = Math.min(height[k], height[i]) - height[j];
-        const w = i - k - 1;
+        const left = stack[stack.length - 1];
+        const h = Math.min(height[left], height[i]) - height[mid];
+        const w = i - left - 1;
         ans += h * w;
+      }
+    }
+    stack.push(i);
+  }
+  return ans;
+};
+```
+
+# 84. 柱状图中最大的矩形
+
+```js
+/**
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function (heights) {
+  heights = [0, ...heights, 0];
+  const n = heights.length;
+  const stack = [0];
+  let ans = 0;
+  for (let i = 1; i < n; i++) {
+    while (stack.length && heights[i] < heights[stack[stack.length - 1]]) {
+      const mid = stack.pop();
+      if (stack.length) {
+        const left = stack[stack.length - 1];
+        const h = heights[mid];
+        const w = i - left - 1;
+        ans = Math.max(ans, h * w);
       }
     }
     stack.push(i);
