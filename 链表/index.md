@@ -141,3 +141,55 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
  * obj.deleteAtIndex(index)
  */
 ```
+
+# 206. 反转链表
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function (head) {
+  let cur = head;
+  let pre = null;
+  while (cur !== null) {
+    const temp = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = temp;
+  }
+  return pre;
+};
+```
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function (head) {
+  const reverse = (cur, pre) => {
+    if (cur === null) {
+      return pre;
+    }
+    const temp = cur.next;
+    cur.next = pre;
+    return reverse(temp, cur);
+  };
+  return reverse(head, null);
+};
+```
