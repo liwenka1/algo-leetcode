@@ -258,3 +258,39 @@ var removeNthFromEnd = function (head, n) {
   return dummyhead.next;
 };
 ```
+
+# 142. 环形链表 II
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var detectCycle = function (head) {
+  let dummyhead = new ListNode();
+  dummyhead.next = head;
+  let slow = dummyhead;
+  let fast = dummyhead;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      let cur = dummyhead;
+      while (slow !== cur) {
+        slow = slow.next;
+        cur = cur.next;
+      }
+      return slow;
+    }
+  }
+  return null;
+};
+```
