@@ -52,3 +52,25 @@ var nextGreaterElement = function (nums1, nums2) {
   return ans;
 };
 ```
+
+# 503. 下一个更大元素 II
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var nextGreaterElements = function (nums) {
+  const n = nums.length;
+  const stack = [0];
+  const ans = new Array(n).fill(-1);
+  for (let i = 1; i < 2 * n; i++) {
+    while (stack.length && nums[i % n] > nums[stack[stack.length - 1]]) {
+      const j = stack.pop();
+      ans[j % n] = nums[i % n];
+    }
+    stack.push(i % n);
+  }
+  return ans;
+};
+```
