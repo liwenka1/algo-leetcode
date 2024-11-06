@@ -193,3 +193,35 @@ var reverseList = function (head) {
   return reverse(head, null);
 };
 ```
+
+# 24. 两两交换链表中的节点
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var swapPairs = function (head) {
+  let dummyhead = new ListNode();
+  dummyhead.next = head;
+  let cur = dummyhead;
+  while (cur.next && cur.next.next) {
+    const firstNode = cur.next;
+    const secondNode = cur.next.next;
+
+    firstNode.next = secondNode.next;
+    secondNode.next = firstNode;
+    cur.next = secondNode;
+
+    cur = firstNode;
+  }
+  return dummyhead.next;
+};
+```
