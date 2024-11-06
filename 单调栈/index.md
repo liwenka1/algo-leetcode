@@ -74,3 +74,30 @@ var nextGreaterElements = function (nums) {
   return ans;
 };
 ```
+
+# 42. 接雨水
+
+```js
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function (height) {
+  const n = height.length;
+  const stack = [0];
+  let ans = 0;
+  for (let i = 1; i < n; i++) {
+    while (stack.length && height[i] > height[stack[stack.length - 1]]) {
+      const j = stack.pop();
+      if (stack.length) {
+        const k = stack[stack.length - 1];
+        const h = Math.min(height[k], height[i]) - height[j];
+        const w = i - k - 1;
+        ans += h * w;
+      }
+    }
+    stack.push(i);
+  }
+  return ans;
+};
+```
