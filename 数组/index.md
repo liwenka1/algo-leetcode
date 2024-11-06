@@ -118,3 +118,44 @@ var minSubArrayLen = function (target, nums) {
   return ans === Infinity ? 0 : ans;
 };
 ```
+
+# 59. 螺旋矩阵 II
+
+```js
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+var generateMatrix = function (n) {
+  const mid = Math.floor(n / 2);
+  let loop = mid;
+  let startx = 0;
+  let starty = 0;
+  let offset = 1;
+  let cnt = 1;
+  const ans = Array.from({ length: n }, () => new Array(n).fill(0));
+  while (loop--) {
+    let i = startx;
+    let j = starty;
+    while (j < n - offset) {
+      ans[i][j++] = cnt++;
+    }
+    while (i < n - offset) {
+      ans[i++][j] = cnt++;
+    }
+    while (j >= offset) {
+      ans[i][j--] = cnt++;
+    }
+    while (i >= offset) {
+      ans[i--][j] = cnt++;
+    }
+    startx++;
+    starty++;
+    offset++;
+  }
+  if (n % 2 === 1) {
+    ans[mid][mid] = n * n;
+  }
+  return ans;
+};
+```
