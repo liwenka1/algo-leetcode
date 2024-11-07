@@ -102,3 +102,37 @@ MyStack.prototype.empty = function () {
  * var param_4 = obj.empty()
  */
 ```
+
+# 20. 有效的括号
+
+```js
+/**
+ * @param {charing} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const n = s.length;
+  if (n % 2 !== 0) {
+    return false;
+  }
+  const stack = [];
+  const left = ["(", "{", "["];
+  const map = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
+  for (const char of s) {
+    if (left.includes(char)) {
+      stack.push(char);
+    } else {
+      // 如果栈为空或匹配失败，则返回 false
+      // 如果栈为空，stack.pop() 将返回 undefined
+      if (map[stack.pop()] !== char) {
+        return false;
+      }
+    }
+  }
+  return !stack.length;
+};
+```
