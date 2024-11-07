@@ -20,3 +20,24 @@ var isAnagram = function (s, t) {
   return cnt.every((i) => i === 0);
 };
 ```
+
+# 349. 两个数组的交集
+
+```js
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function (nums1, nums2) {
+  const set1 = new Set(nums1);
+  const set2 = new Set(nums2);
+  const ans = new Set();
+  for (const num of set2) {
+    if (set1.has(num)) {
+      ans.add(num);
+    }
+  }
+  return Array.from(ans);
+};
+```
