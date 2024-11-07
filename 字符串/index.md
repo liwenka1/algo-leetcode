@@ -84,3 +84,17 @@ var reverseWords = function (s) {
   return s.join("").slice(0, slow).split(" ").reverse().join(" ");
 };
 ```
+
+# 459. 重复的子字符串
+
+```js
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var repeatedSubstringPattern = function (s) {
+  const ss = s + s;
+  const n = ss.length;
+  return ss.substring(1, n - 1).includes(s);
+};
+```
