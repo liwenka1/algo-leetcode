@@ -59,3 +59,28 @@ var reverseStr = function (s, k) {
   return ans;
 };
 ```
+
+# 151. 反转字符串中的单词
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseWords = function (s) {
+  s = Array.from(s);
+  const n = s.length;
+  let slow = 0;
+  for (let fast = 0; fast < n; fast++) {
+    if (s[fast] !== " ") {
+      if (slow !== 0) {
+        s[slow++] = " ";
+      }
+      while (fast < n && s[fast] !== " ") {
+        s[slow++] = s[fast++];
+      }
+    }
+  }
+  return s.join("").slice(0, slow).split(" ").reverse().join(" ");
+};
+```
