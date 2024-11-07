@@ -156,3 +156,33 @@ var removeDuplicates = function (s) {
   return stack.join("");
 };
 ```
+
+# 150. 逆波兰表达式求值
+
+```js
+/**
+ * @param {string[]} tokens
+ * @return {number}
+ */
+var evalRPN = function (tokens) {
+  const stack = [];
+  for (const token of tokens) {
+    if (token === "+" || token === "-" || token === "*" || token === "/") {
+      const y = stack.pop();
+      const x = stack.pop();
+      if (token === "+") {
+        stack.push(x + y);
+      } else if (token === "-") {
+        stack.push(x - y);
+      } else if (token === "*") {
+        stack.push(x * y);
+      } else if (token === "/") {
+        stack.push(Math.trunc(x / y));
+      }
+    } else {
+      stack.push(Number(token));
+    }
+  }
+  return stack.pop();
+};
+```
