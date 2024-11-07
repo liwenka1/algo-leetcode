@@ -41,3 +41,44 @@ var intersection = function (nums1, nums2) {
   return Array.from(ans);
 };
 ```
+
+# 1. 两数之和
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+  const map = new Map();
+  const n = nums.length;
+  for (let i = 0; i < n; i++) {
+    map.set(target - nums[i], i);
+  }
+  for (let i = 0; i < n; i++) {
+    if (map.has(nums[i]) && i !== map.get(nums[i])) {
+      return [i, map.get(nums[i])];
+    }
+  }
+};
+```
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+  const map = new Map();
+  const n = nums.length;
+  for (let i = 0; i < n; i++) {
+    const s = target - nums[i];
+    if (map.has(s)) {
+      return [i, map.get(s)];
+    }
+    map.set(nums[i], i);
+  }
+};
+```
