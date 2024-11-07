@@ -186,3 +186,31 @@ var evalRPN = function (tokens) {
   return stack.pop();
 };
 ```
+
+# 239. 滑动窗口最大值
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function (nums, k) {
+  const n = nums.length;
+  const deque = [];
+  const ans = [];
+  for (let i = 0; i < n; i++) {
+    if (deque.length && deque[0] < i - k + 1) {
+      deque.shift();
+    }
+    while (deque.length && nums[i] > nums[deque[deque.length - 1]]) {
+      deque.pop();
+    }
+    deque.push(i);
+    if (i >= k - 1) {
+      ans.push(nums[deque[0]]);
+    }
+  }
+  return ans;
+};
+```
