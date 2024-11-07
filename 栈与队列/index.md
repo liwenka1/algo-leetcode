@@ -136,3 +136,23 @@ var isValid = function (s) {
   return !stack.length;
 };
 ```
+
+# 1047. 删除字符串中的所有相邻重复项
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var removeDuplicates = function (s) {
+  const stack = [];
+  for (const char of s) {
+    if (stack.length && stack[stack.length - 1] === char) {
+      stack.pop();
+    } else {
+      stack.push(char);
+    }
+  }
+  return stack.join("");
+};
+```
