@@ -214,3 +214,23 @@ var maxSlidingWindow = function (nums, k) {
   return ans;
 };
 ```
+
+# 347. 前 K 个高频元素
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function (nums, k) {
+  const map = new Map();
+  for (let num of nums) {
+    map.set(num, (map.get(num) || 0) + 1);
+  }
+  return [...map.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, k)
+    .map((i) => i[0]);
+};
+```
