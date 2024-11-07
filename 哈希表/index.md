@@ -113,3 +113,55 @@ var fourSumCount = function (nums1, nums2, nums3, nums4) {
   return ans;
 };
 ```
+
+# 15. 三数之和
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  const ans = [];
+  for (let i = 0; i < n - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) {
+      continue;
+    }
+    if (nums[i] + nums[i + 1] + nums[i + 2] > 0) {
+      break;
+    }
+    if (nums[i] + nums[n - 1] + nums[n - 2] < 0) {
+      continue;
+    }
+    let left = i + 1;
+    let right = n - 1;
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+      if (sum < 0) {
+        while (nums[left] === nums[left + 1]) {
+          left++;
+        }
+        left++;
+      } else if (sum > 0) {
+        while (nums[right] === nums[right - 1]) {
+          right--;
+        }
+        right--;
+      } else {
+        ans.push([nums[i], nums[left], nums[right]]);
+        while (nums[left] === nums[left + 1]) {
+          left++;
+        }
+        while (nums[right] === nums[right - 1]) {
+          right--;
+        }
+        left++;
+        right--;
+      }
+    }
+  }
+  return ans;
+};
+```
