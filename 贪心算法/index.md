@@ -53,3 +53,31 @@ var findContentChildren = function (g, s) {
   return ans;
 };
 ```
+
+# 376. 摆动序列
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var wiggleMaxLength = function (nums) {
+  const n = nums.length;
+  if (n === 1) {
+    return 1;
+  }
+  if (n === 2 && nums[0] !== nums[1]) {
+    return 2;
+  }
+  let prediff = 0;
+  let ans = 1;
+  for (let i = 0; i < n - 1; i++) {
+    const curdiff = nums[i + 1] - nums[i];
+    if ((prediff <= 0 && curdiff > 0) || (prediff >= 0 && curdiff < 0)) {
+      ans++;
+      prediff = curdiff;
+    }
+  }
+  return ans;
+};
+```
