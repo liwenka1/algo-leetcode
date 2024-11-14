@@ -105,3 +105,22 @@ var maxSubArray = function (nums) {
   return ans;
 };
 ```
+
+# 122. 买卖股票的最佳时机 II
+
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (prices) {
+  const n = prices.length;
+  let ans = 0;
+  for (let i = 1; i < n; i++) {
+    if (prices[i] - prices[i - 1] > 0) {
+      ans += prices[i] - prices[i - 1];
+    }
+  }
+  return ans;
+};
+```
