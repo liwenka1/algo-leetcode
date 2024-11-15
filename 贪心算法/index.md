@@ -149,3 +149,31 @@ var canJump = function (nums) {
   return false;
 };
 ```
+
+# 45. 跳跃游戏 II
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump = function (nums) {
+  const n = nums.length;
+  if (n === 1) {
+    return 0;
+  }
+  let lastJumpEnd = 0;
+  let cover = 0;
+  let ans = 0;
+  for (let i = 0; i < n; i++) {
+    cover = Math.max(cover, i + nums[i]);
+    if (i === lastJumpEnd) {
+      ans++;
+      lastJumpEnd = cover;
+      if (lastJumpEnd >= n - 1) {
+        return ans;
+      }
+    }
+  }
+};
+```
