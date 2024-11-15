@@ -203,3 +203,28 @@ var largestSumAfterKNegations = function (nums, k) {
   return sum;
 };
 ```
+
+# 134. 加油站
+
+```js
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+var canCompleteCircuit = function (gas, cost) {
+  const n = gas.length;
+  let cursum = 0;
+  let totalsum = 0;
+  let start = 0;
+  for (let i = 0; i < n; i++) {
+    totalsum += gas[i] - cost[i];
+    cursum += gas[i] - cost[i];
+    if (cursum < 0) {
+      cursum = 0;
+      start = i + 1;
+    }
+  }
+  return totalsum >= 0 ? start : -1;
+};
+```
