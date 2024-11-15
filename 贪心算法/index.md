@@ -124,3 +124,28 @@ var maxProfit = function (prices) {
   return ans;
 };
 ```
+
+# 55. 跳跃游戏
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function (nums) {
+  const n = nums.length;
+  if (n === 1) {
+    return true;
+  }
+  let cover = 0;
+  for (let i = 0; i < n; i++) {
+    if (cover >= i) {
+      cover = Math.max(i + nums[i], cover);
+    }
+    if (cover >= n - 1) {
+      return true;
+    }
+  }
+  return false;
+};
+```
