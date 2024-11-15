@@ -177,3 +177,29 @@ var jump = function (nums) {
   }
 };
 ```
+
+# 1005. K 次取反后最大化的数组和
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var largestSumAfterKNegations = function (nums, k) {
+  nums.sort((a, b) => Math.abs(b) - Math.abs(a));
+  const n = nums.length;
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    if (nums[i] < 0 && k > 0) {
+      nums[i] *= -1;
+      k--;
+    }
+    sum += nums[i];
+  }
+  if (k % 2 === 1) {
+    sum -= 2 * nums[n - 1];
+  }
+  return sum;
+};
+```
