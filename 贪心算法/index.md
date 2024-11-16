@@ -228,3 +228,29 @@ var canCompleteCircuit = function (gas, cost) {
   return totalsum >= 0 ? start : -1;
 };
 ```
+
+# 135. 分发糖果
+
+```js
+/**
+ * @param {number[]} ratings
+ * @return {number}
+ */
+var candy = function (ratings) {
+  const n = ratings.length;
+  const candy = new Array(n).fill(1);
+  for (let i = 1; i < n; i++) {
+    if (ratings[i] > ratings[i - 1]) {
+      candy[i] = candy[i - 1] + 1;
+    }
+  }
+  let ans = candy[n - 1];
+  for (let i = n - 2; i >= 0; i--) {
+    if (ratings[i] > ratings[i + 1]) {
+      candy[i] = Math.max(candy[i], candy[i + 1] + 1);
+    }
+    ans += candy[i];
+  }
+  return ans;
+};
+```
