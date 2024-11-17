@@ -311,3 +311,25 @@ var reconstructQueue = function (people) {
   return queue;
 };
 ```
+
+# 452. 用最少数量的箭引爆气球
+
+```js
+/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+var findMinArrowShots = function (points) {
+  points.sort((a, b) => a[0] - b[0]);
+  const n = points.length;
+  let ans = 1;
+  for (let i = 1; i < n; i++) {
+    if (points[i][0] > points[i - 1][1]) {
+      ans++;
+    } else {
+      points[i][1] = Math.min(points[i][1], points[i - 1][1]);
+    }
+  }
+  return ans;
+};
+```
