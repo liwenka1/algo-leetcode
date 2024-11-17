@@ -354,3 +354,30 @@ var eraseOverlapIntervals = function (intervals) {
   return ans;
 };
 ```
+
+# 763. 划分字母区间
+
+```js
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+var partitionLabels = function (s) {
+  const n = s.length;
+  const cnt = new Array(26).fill(0);
+  for (let i = 0; i < n; i++) {
+    const char = s[i];
+    cnt[char.charCodeAt(0) - "a".charCodeAt(0)] = i;
+  }
+  const ans = [];
+  for (let left = 0, right = 0, i = 0; i < n; i++) {
+    const char = s[i];
+    right = Math.max(right, cnt[char.charCodeAt(0) - "a".charCodeAt(0)]);
+    if (i === right) {
+      ans.push(right - left + 1);
+      left = right + 1;
+    }
+  }
+  return ans;
+};
+```
