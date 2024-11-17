@@ -286,3 +286,28 @@ var lemonadeChange = function (bills) {
   return true;
 };
 ```
+
+# 406. 根据身高重建队列
+
+```js
+/**
+ * @param {number[][]} people
+ * @return {number[][]}
+ */
+var reconstructQueue = function (people) {
+  const queue = [];
+  people.sort((a, b) => {
+    if (a[0] === b[0]) {
+      return a[1] - b[1];
+    } else {
+      return b[0] - a[0];
+    }
+  });
+  const n = people.length;
+  for (let i = 0; i < n; i++) {
+    const [h, k] = people[i];
+    queue.splice(k, 0, [h, k]);
+  }
+  return queue;
+};
+```
