@@ -254,3 +254,35 @@ var candy = function (ratings) {
   return ans;
 };
 ```
+
+# 860. 柠檬水找零
+
+```js
+/**
+ * @param {number[]} bills
+ * @return {boolean}
+ */
+var lemonadeChange = function (bills) {
+  let fivecnt = 0;
+  let tencnt = 0;
+  for (const bill of bills) {
+    if (bill === 5) {
+      fivecnt++;
+    } else if (bill === 10) {
+      tencnt++;
+      fivecnt--;
+    } else if (bill === 20) {
+      if (tencnt > 0) {
+        tencnt--;
+        fivecnt--;
+      } else {
+        fivecnt -= 3;
+      }
+    }
+    if (fivecnt < 0) {
+      return false;
+    }
+  }
+  return true;
+};
+```
