@@ -433,3 +433,45 @@ var monotoneIncreasingDigits = function (n) {
   return Number(s.join(""));
 };
 ```
+
+# 968. 监控二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minCameraCover = function (root) {
+  let ans = 0;
+  // 0 无覆盖 1 有摄像头 2 有覆盖
+  const fn = (node) => {
+    if (node === null) {
+      return 2;
+    }
+    let left = fn(node.left);
+    let right = fn(node.right);
+    if (left === 2 && right === 2) {
+      return 0;
+    }
+    if (left === 0 || right === 0) {
+      ans++;
+      return 1;
+    }
+    if (left === 1 || right === 1) {
+      return 2;
+    }
+  };
+  if (fn(root) === 0) {
+    ans++;
+  }
+  return ans;
+};
+```
