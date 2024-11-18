@@ -407,3 +407,29 @@ var merge = function (intervals) {
   return ans;
 };
 ```
+
+# 738. 单调递增的数字
+
+```js
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var monotoneIncreasingDigits = function (n) {
+  s = String(n)
+    .split("")
+    .map((i) => Number(i));
+  const len = s.length;
+  let flag = len;
+  for (let i = len - 2; i >= 0; i--) {
+    if (s[i] > s[i + 1]) {
+      s[i]--;
+      flag = i + 1;
+    }
+  }
+  for (let i = flag; i < len; i++) {
+    s[i] = 9;
+  }
+  return Number(s.join(""));
+};
+```
