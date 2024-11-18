@@ -381,3 +381,29 @@ var partitionLabels = function (s) {
   return ans;
 };
 ```
+
+# 56. 合并区间
+
+```js
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function (intervals) {
+  intervals.sort((a, b) => a[0] - b[0]);
+  const n = intervals.length;
+  let [left, right] = intervals[0];
+  const ans = [];
+  for (let i = 1; i < n; i++) {
+    if (right >= intervals[i][0]) {
+      right = Math.max(intervals[i][1], right);
+    } else {
+      ans.push([left, right]);
+      left = intervals[i][0];
+      right = intervals[i][1];
+    }
+  }
+  ans.push([left, right]);
+  return ans;
+};
+```
