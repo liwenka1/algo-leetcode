@@ -49,3 +49,35 @@ var combine = function (n, k) {
   return ans;
 };
 ```
+
+# 216. 组合总和 III
+
+```js
+/**
+ * @param {number} k
+ * @param {number} n
+ * @return {number[][]}
+ */
+var combinationSum3 = function (k, n) {
+  const path = [];
+  const ans = [];
+  const dfs = (start, sum) => {
+    if (sum > n) {
+      return;
+    }
+    if (path.length === k) {
+      if (sum === n) {
+        ans.push([...path]);
+      }
+      return;
+    }
+    for (let i = start; i <= 9; i++) {
+      path.push(i);
+      dfs(i + 1, sum + i);
+      path.pop();
+    }
+  };
+  dfs(1, 0);
+  return ans;
+};
+```
