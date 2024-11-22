@@ -515,3 +515,60 @@ var solveSudoku = function (board) {
   dfs();
 };
 ```
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solveSudoku = function (board) {
+  const rows = Array.from({ length: 9 }, () => new Array(9).fill(false));
+  const cols = Array.from({ length: 9 }, () => new Array(9).fill(false));
+  const blocks = Array.from({ length: 9 }, () => new Array(9).fill(false));
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (board[i][j] === ".") {
+        continue;
+      }
+      const k = Number(board[i][j]);
+      const blockIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+      rows[i][k - 1] = true;
+      cols[j][k - 1] = true;
+      blocks[blockIndex][k - 1] = true;
+    }
+  }
+  const isValid = (row, col, blockIndex, k) => {
+    return !rows[row][k - 1] && !cols[col][k - 1] && !blocks[blockIndex][k - 1];
+  };
+  const dfs = () => {
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (board[i][j] !== ".") {
+          continue;
+        }
+        const blockIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+        for (let k = 1; k <= 9; k++) {
+          if (isValid(i, j, blockIndex, k)) {
+            board[i][j] = String(k);
+            rows[i][k - 1] = true;
+            cols[j][k - 1] = true;
+            blocks[blockIndex][k - 1] = true;
+
+            if (dfs()) {
+              return true;
+            }
+
+            board[i][j] = ".";
+            rows[i][k - 1] = false;
+            cols[j][k - 1] = false;
+            blocks[blockIndex][k - 1] = false;
+          }
+        }
+        return false;
+      }
+    }
+    return true;
+  };
+  dfs();
+};
+```
