@@ -228,3 +228,35 @@ var partition = function (s) {
   return ans;
 };
 ```
+
+# 93. 复原 IP 地址
+
+```js
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var restoreIpAddresses = function (s) {
+  const n = s.length;
+  const path = [];
+  const ans = [];
+  const dfs = (start, cnt) => {
+    if (cnt === 0) {
+      if (start === n) {
+        ans.push(path.join("."));
+      }
+      return;
+    }
+    for (let i = start; i < n; i++) {
+      const str = s.substring(start, i + 1);
+      if ((str.length === 1 || str[0] !== "0") && Number(str) <= 255) {
+        path.push(str);
+        dfs(i + 1, cnt - 1);
+        path.pop();
+      }
+    }
+  };
+  dfs(0, 4);
+  return ans;
+};
+```
