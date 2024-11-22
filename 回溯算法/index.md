@@ -385,3 +385,38 @@ var permute = function (nums) {
   return ans;
 };
 ```
+
+# 47. 全排列 II
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permuteUnique = function (nums) {
+  const n = nums.length;
+  const used = new Array(n).fill(false);
+  const path = [];
+  const ans = [];
+  const dfs = () => {
+    if (path.length === n) {
+      ans.push([...path]);
+      return;
+    }
+    const set = new Set();
+    for (let i = 0; i < n; i++) {
+      if (used[i] || set.has(nums[i])) {
+        continue;
+      }
+      set.add(nums[i]);
+      used[i] = true;
+      path.push(nums[i]);
+      dfs();
+      path.pop();
+      used[i] = false;
+    }
+  };
+  dfs();
+  return ans;
+};
+```
