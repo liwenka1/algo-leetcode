@@ -420,3 +420,43 @@ var permuteUnique = function (nums) {
   return ans;
 };
 ```
+
+# 51. N 皇后
+
+```js
+/**
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function (n) {
+  const path = Array.from({ length: n }, () => new Array(n).fill("."));
+  const cols = new Set();
+  const diag1 = new Set();
+  const diag2 = new Set();
+  const ans = [];
+  const dfs = (row) => {
+    if (row === n) {
+      ans.push(path.map((row) => row.join("")));
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      if (cols.has(i) || diag1.has(row - i) || diag2.has(row + i)) {
+        continue;
+      }
+      path[row][i] = "Q";
+      cols.add(i);
+      diag1.add(row - i);
+      diag2.add(row + i);
+
+      dfs(row + 1);
+
+      path[row][i] = ".";
+      cols.delete(i);
+      diag1.delete(row - i);
+      diag2.delete(row + i);
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
