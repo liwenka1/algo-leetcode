@@ -81,3 +81,44 @@ var combinationSum3 = function (k, n) {
   return ans;
 };
 ```
+
+# 17. 电话号码的字母组合
+
+```js
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function (digits) {
+  const n = digits.length;
+  if (n === 0) {
+    return [];
+  }
+  const list = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: "pqrs",
+    8: "tuv",
+    9: "wxyz",
+  };
+  const path = [];
+  const ans = [];
+  const dfs = (start) => {
+    if (start === n) {
+      ans.push(path.join(""));
+      return;
+    }
+    const strList = list[digits[start]];
+    for (const str of strList) {
+      path.push(str);
+      dfs(start + 1);
+      path.pop();
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
