@@ -460,3 +460,58 @@ var solveNQueens = function (n) {
   return ans;
 };
 ```
+
+# 37. 解数独
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solveSudoku = function (board) {
+  const n = board.length;
+  const isValid = (row, col, k) => {
+    for (let i = 0; i < 9; i++) {
+      if (board[row][i] === String(k)) {
+        return false;
+      }
+    }
+    for (let i = 0; i < 9; i++) {
+      if (board[i][col] === String(k)) {
+        return false;
+      }
+    }
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    for (let i = startRow; i < startRow + 3; i++) {
+      for (let j = startCol; j < startCol + 3; j++) {
+        if (board[i][j] === String(k)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const dfs = () => {
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        if (board[i][j] !== ".") {
+          continue;
+        }
+        for (let k = 1; k <= 9; k++) {
+          if (isValid(i, j, k)) {
+            board[i][j] = String(k);
+            if (dfs()) {
+              return true;
+            }
+            board[i][j] = ".";
+          }
+        }
+        return false;
+      }
+    }
+    return true;
+  };
+  dfs();
+};
+```
