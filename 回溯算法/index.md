@@ -188,3 +188,43 @@ var combinationSum2 = function (candidates, target) {
   return ans;
 };
 ```
+
+# 131. 分割回文串
+
+```js
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+var partition = function (s) {
+  const n = s.length;
+  const path = [];
+  const ans = [];
+  const isPalindrome = (str) => {
+    let left = 0;
+    let right = str.length - 1;
+    while (left < right) {
+      if (str[left] !== str[right]) return false;
+      left++;
+      right--;
+    }
+    return true;
+  };
+  const dfs = (start) => {
+    if (start === n) {
+      ans.push([...path]);
+      return;
+    }
+    for (let i = start; i < n; i++) {
+      const str = s.substring(start, i + 1);
+      if (isPalindrome(str)) {
+        path.push(str);
+        dfs(i + 1);
+        path.pop();
+      }
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
