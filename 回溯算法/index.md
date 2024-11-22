@@ -260,3 +260,30 @@ var restoreIpAddresses = function (s) {
   return ans;
 };
 ```
+
+# 78. 子集
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function (nums) {
+  const n = nums.length;
+  const path = [];
+  const ans = [];
+  const dfs = (start) => {
+    ans.push([...path]);
+    if (start === n) {
+      return;
+    }
+    for (let i = start; i < n; i++) {
+      path.push(nums[i]);
+      dfs(i + 1);
+      path.pop();
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
