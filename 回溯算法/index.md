@@ -122,3 +122,34 @@ var letterCombinations = function (digits) {
   return ans;
 };
 ```
+
+# 39. 组合总和
+
+```js
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function (candidates, target) {
+  const n = candidates.length;
+  const path = [];
+  const ans = [];
+  const dfs = (start, sum) => {
+    if (sum === target) {
+      ans.push([...path]);
+      return;
+    }
+    if (start === n || sum > target) {
+      return;
+    }
+    for (let i = start; i < n; i++) {
+      path.push(candidates[i]);
+      dfs(i, sum + candidates[i]);
+      path.pop();
+    }
+  };
+  dfs(0, 0);
+  return ans;
+};
+```
