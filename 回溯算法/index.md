@@ -287,3 +287,34 @@ var subsets = function (nums) {
   return ans;
 };
 ```
+
+# 90. 子集 II
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function (nums) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  const path = [];
+  const ans = [];
+  const dfs = (start) => {
+    ans.push([...path]);
+    if (start === n) {
+      return;
+    }
+    for (let i = start; i < n; i++) {
+      if (i > start && nums[i] === nums[i - 1]) {
+        continue;
+      }
+      path.push(nums[i]);
+      dfs(i + 1);
+      path.pop();
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
