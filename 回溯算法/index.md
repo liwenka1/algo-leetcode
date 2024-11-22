@@ -318,3 +318,37 @@ var subsetsWithDup = function (nums) {
   return ans;
 };
 ```
+
+# 491. 非递减子序列
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var findSubsequences = function (nums) {
+  const n = nums.length;
+  const path = [];
+  const ans = [];
+  const dfs = (start) => {
+    if (path.length >= 2) {
+      ans.push([...path]);
+    }
+    if (start === n) {
+      return;
+    }
+    const set = new Set();
+    for (let i = start; i < n; i++) {
+      if (nums[i] < path[path.length - 1] || set.has(nums[i])) {
+        continue;
+      }
+      set.add(nums[i]);
+      path.push(nums[i]);
+      dfs(i + 1);
+      path.pop();
+    }
+  };
+  dfs(0);
+  return ans;
+};
+```
