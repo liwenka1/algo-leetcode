@@ -352,3 +352,36 @@ var findSubsequences = function (nums) {
   return ans;
 };
 ```
+
+# 46. 全排列
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function (nums) {
+  const n = nums.length;
+  const used = new Array(n).fill(false);
+  const path = [];
+  const ans = [];
+  const dfs = () => {
+    if (path.length === n) {
+      ans.push([...path]);
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      if (used[i]) {
+        continue;
+      }
+      used[i] = true;
+      path.push(nums[i]);
+      dfs();
+      path.pop();
+      used[i] = false;
+    }
+  };
+  dfs();
+  return ans;
+};
+```
