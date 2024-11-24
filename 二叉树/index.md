@@ -187,3 +187,37 @@ var isSymmetric = function (root) {
   return dfs(root.left, root.right);
 };
 ```
+
+# 104. 二叉树的最大深度
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+  let ans = 0;
+  const dfs = (node, depth) => {
+    if (node === null) {
+      return;
+    }
+    if (node.left) {
+      dfs(node.left, depth + 1);
+    }
+    if (node.right) {
+      dfs(node.right, depth + 1);
+    }
+    ans = Math.max(ans, depth + 1);
+  };
+  dfs(root, 0);
+  return ans;
+};
+```
