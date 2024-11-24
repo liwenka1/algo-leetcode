@@ -275,3 +275,28 @@ var minDepth = function (root) {
   return Math.min(left, right) + 1;
 };
 ```
+
+# 222. 完全二叉树的节点个数
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var countNodes = function (root) {
+  if (root === null) {
+    return 0;
+  }
+  const left = countNodes(root.left);
+  const right = countNodes(root.right);
+  return left + right + 1;
+};
+```
