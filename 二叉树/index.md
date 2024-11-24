@@ -300,3 +300,39 @@ var countNodes = function (root) {
   return left + right + 1;
 };
 ```
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var countNodes = function (root) {
+  if (root === null) {
+    return 0;
+  }
+  let leftdepth = 1;
+  let rightdepth = 1;
+  let left = root.left;
+  let right = root.right;
+  while (left) {
+    left = left.left;
+    leftdepth++;
+  }
+  while (right) {
+    right = right.right;
+    rightdepth++;
+  }
+  if (leftdepth === rightdepth) {
+    return Math.pow(2, leftdepth) - 1;
+  }
+  return countNodes(root.left) + countNodes(root.right) + 1;
+};
+```
