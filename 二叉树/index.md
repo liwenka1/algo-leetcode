@@ -404,3 +404,40 @@ var binaryTreePaths = function (root) {
   return ans;
 };
 ```
+
+# 404. 左叶子之和
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var sumOfLeftLeaves = function (root) {
+  if (root == null) {
+    return 0;
+  }
+  if (root.left === null && root.right === null) {
+    return 0;
+  }
+  let leftsum;
+  if (
+    root.left !== null &&
+    root.left.left === null &&
+    root.left.right === null
+  ) {
+    leftsum = root.left.val;
+  } else {
+    leftsum = sumOfLeftLeaves(root.left);
+  }
+  let rightsum = sumOfLeftLeaves(root.right);
+  return leftsum + rightsum;
+};
+```
