@@ -441,3 +441,44 @@ var sumOfLeftLeaves = function (root) {
   return leftsum + rightsum;
 };
 ```
+
+# 513. 找树左下角的值
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findBottomLeftValue = function (root) {
+  let maxDepth = -Infinity;
+  let ans = 0;
+  const dfs = (node, depth) => {
+    if (node.left === null && node.right === null) {
+      if (depth > maxDepth) {
+        maxDepth = depth;
+        ans = node.val;
+      }
+    }
+    if (node.left) {
+      depth++;
+      dfs(node.left, depth);
+      depth--;
+    }
+    if (node.right) {
+      depth++;
+      dfs(node.right, depth);
+      depth--;
+    }
+  };
+  dfs(root, 0);
+  return ans;
+};
+```
