@@ -482,3 +482,44 @@ var findBottomLeftValue = function (root) {
   return ans;
 };
 ```
+
+# 112. 路径总和
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function (root, targetSum) {
+  const dfs = (node, sum) => {
+    if (node === null) {
+      return false;
+    }
+    sum += node.val;
+    if (node.left === null && node.right === null) {
+      return sum === targetSum;
+    }
+    if (node.left) {
+      if (dfs(node.left, sum)) {
+        return true;
+      }
+    }
+    if (node.right) {
+      if (dfs(node.right, sum)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  return dfs(root, 0);
+};
+```
