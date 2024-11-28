@@ -711,3 +711,39 @@ var getMinimumDifference = function (root) {
   return ans;
 };
 ```
+
+# 501. 二叉搜索树中的众数
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var findMode = function (root) {
+  const map = {};
+  const dfs = (node) => {
+    if (node === null) {
+      return;
+    }
+    if (!map[node.val]) {
+      map[node.val] = 0;
+    }
+    map[node.val]++;
+    dfs(node.left);
+    dfs(node.right);
+  };
+  dfs(root);
+  const max = Math.max(...Object.values(map));
+  return Object.keys(map)
+    .filter((key) => map[key] === max)
+    .map(Number);
+};
+```
