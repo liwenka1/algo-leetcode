@@ -523,3 +523,36 @@ var hasPathSum = function (root, targetSum) {
   return dfs(root, 0);
 };
 ```
+
+# 106. 从中序与后序遍历序列构造二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} inorder
+ * @param {number[]} postorder
+ * @return {TreeNode}
+ */
+var buildTree = function (inorder, postorder) {
+  const n = postorder.length;
+  if (n === 0) {
+    return null;
+  }
+  const rootval = postorder[postorder.length - 1];
+  const leftsize = inorder.indexOf(rootval);
+  const inorderleft = inorder.slice(0, leftsize);
+  const inorderright = inorder.slice(leftsize + 1, n);
+  const postorderleft = postorder.slice(0, leftsize);
+  const postorderright = postorder.slice(leftsize, n - 1);
+  const left = buildTree(inorderleft, postorderleft);
+  const right = buildTree(inorderright, postorderright);
+  return new TreeNode(rootval, left, right);
+};
+```
