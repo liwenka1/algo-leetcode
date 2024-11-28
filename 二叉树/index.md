@@ -677,3 +677,37 @@ var isValidBST = function (root) {
   return dfs(root, -Infinity, Infinity);
 };
 ```
+
+# 530. 二叉搜索树的最小绝对差
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var getMinimumDifference = function (root) {
+  let pre = null;
+  let ans = Infinity;
+  const dfs = (node) => {
+    if (node === null) {
+      return;
+    }
+    dfs(node.left);
+    if (pre !== null) {
+      ans = Math.min(ans, Math.abs(pre.val - node.val));
+    }
+    pre = node;
+    dfs(node.right);
+  };
+  dfs(root);
+  return ans;
+};
+```
