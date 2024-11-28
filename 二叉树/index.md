@@ -590,3 +590,30 @@ var constructMaximumBinaryTree = function (nums) {
   return new TreeNode(maxval, left, right);
 };
 ```
+
+# 617. 合并二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root1
+ * @param {TreeNode} root2
+ * @return {TreeNode}
+ */
+var mergeTrees = function (root1, root2) {
+  if (root1 === null && root2 === null) {
+    return null;
+  }
+  const val = (root1?.val || 0) + (root2?.val || 0);
+  const left = mergeTrees(root1?.left || null, root2?.left || null);
+  const right = mergeTrees(root1?.right || null, root2?.right || null);
+  return new TreeNode(val, left, right);
+};
+```
