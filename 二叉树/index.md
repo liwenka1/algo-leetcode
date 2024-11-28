@@ -556,3 +556,37 @@ var buildTree = function (inorder, postorder) {
   return new TreeNode(rootval, left, right);
 };
 ```
+
+# 654. 最大二叉树
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var constructMaximumBinaryTree = function (nums) {
+  const n = nums.length;
+  if (n === 0) {
+    return;
+  }
+  let maxval = -1;
+  let maxindex = -1;
+  for (let i = 0; i < n; i++) {
+    if (nums[i] > maxval) {
+      maxval = nums[i];
+      maxindex = i;
+    }
+  }
+  const left = constructMaximumBinaryTree(nums.slice(0, maxindex));
+  const right = constructMaximumBinaryTree(nums.slice(maxindex + 1, n));
+  return new TreeNode(maxval, left, right);
+};
+```
