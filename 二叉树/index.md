@@ -617,3 +617,34 @@ var mergeTrees = function (root1, root2) {
   return new TreeNode(val, left, right);
 };
 ```
+
+# 700. 二叉搜索树中的搜索
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+var searchBST = function (root, val) {
+  if (root === null) {
+    return null;
+  }
+  if (root.val === val) {
+    return new TreeNode(root.val, root.left, root.right);
+  }
+  if (root.val < val) {
+    return searchBST(root.right, val);
+  } else {
+    return searchBST(root.left, val);
+  }
+};
+```
