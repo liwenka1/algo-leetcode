@@ -235,3 +235,28 @@ var triangleNumber = function (nums) {
   return ans;
 };
 ```
+
+# 11. 盛最多水的容器
+
+```js
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function (height) {
+  const n = height.length;
+  let left = 0;
+  let right = n - 1;
+  let ans = 0;
+  while (left < right) {
+    if (height[left] > height[right]) {
+      ans = Math.max(ans, (right - left) * height[right]);
+      right--;
+    } else {
+      ans = Math.max(ans, (right - left) * height[left]);
+      left++;
+    }
+  }
+  return ans;
+};
+```
