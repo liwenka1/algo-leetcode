@@ -207,3 +207,31 @@ var fourSum = function (nums, target) {
   return ans;
 };
 ```
+
+# 611. 有效三角形的个数
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var triangleNumber = function (nums) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  let ans = 0;
+  for (let i = 2; i < n; i++) {
+    let left = 0;
+    let right = i - 1;
+    while (left < right) {
+      const sum = nums[left] + nums[right];
+      if (sum > nums[i]) {
+        ans += right - left;
+        right--;
+      } else {
+        left++;
+      }
+    }
+  }
+  return ans;
+};
+```
