@@ -44,3 +44,24 @@ var lengthOfLongestSubstring = function (s) {
   return ans;
 };
 ```
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  const n = s.length;
+  const set = new Set();
+  let ans = 0;
+  for (let left = 0, right = 0; right < n; right++) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    ans = Math.max(ans, right - left + 1);
+  }
+  return ans;
+};
+```
