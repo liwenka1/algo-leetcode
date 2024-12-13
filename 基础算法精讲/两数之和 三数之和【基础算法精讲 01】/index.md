@@ -101,3 +101,45 @@ var countPairs = function (nums, target) {
   return ans;
 };
 ```
+
+# 16. 最接近的三数之和
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var threeSumClosest = function (nums, target) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  let ans1 = Infinity;
+  let ans2 = -Infinity;
+  for (let i = 0; i < n - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) {
+      continue;
+    }
+    let left = i + 1;
+    let right = n - 1;
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right] - target;
+      if (sum > 0) {
+        ans1 = Math.min(ans1, sum);
+        while (nums[right] === nums[right - 1]) {
+          right--;
+        }
+        right--;
+      } else if (sum < 0) {
+        ans2 = Math.max(ans2, sum);
+        while (nums[left] === nums[left + 1]) {
+          left++;
+        }
+        left++;
+      } else {
+        return target;
+      }
+    }
+  }
+  return ans1 > -ans2 ? ans2 + target : ans1 + target;
+};
+```
