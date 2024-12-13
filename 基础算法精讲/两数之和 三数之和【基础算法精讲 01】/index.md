@@ -74,3 +74,30 @@ var threeSum = function (nums) {
   return ans;
 };
 ```
+
+# 2824. 统计和小于目标的下标对数目
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var countPairs = function (nums, target) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  let left = 0;
+  let right = n - 1;
+  let ans = 0;
+  while (left < right) {
+    const sum = nums[left] + nums[right];
+    if (sum >= target) {
+      right--;
+    } else {
+      ans += right - left;
+      left++;
+    }
+  }
+  return ans;
+};
+```
