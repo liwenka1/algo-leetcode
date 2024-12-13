@@ -13,12 +13,34 @@ var minSubArrayLen = function (target, nums) {
   for (let left = 0, right = 0; right < n; right++) {
     sum += nums[right];
     while (sum >= target) {
-      console.log(right, left);
       ans = Math.min(ans, right - left + 1);
       sum -= nums[left];
       left++;
     }
   }
   return ans === Infinity ? 0 : ans;
+};
+```
+
+# 3. 无重复字符的最长子串
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  const n = s.length;
+  const map = new Map();
+  let ans = 0;
+  for (let left = 0, right = 0; right < n; right++) {
+    map.set(s[right], (map.get(s[right]) || 0) + 1);
+    while (map.get(s[right]) > 1) {
+      map.set(s[left], map.get(s[left]) - 1);
+      left++;
+    }
+    ans = Math.max(ans, right - left + 1);
+  }
+  return ans;
 };
 ```
