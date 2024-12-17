@@ -92,3 +92,27 @@ var numSubarrayProductLessThanK = function (nums, k) {
   return ans;
 };
 ```
+
+# 2958. 最多 K 个重复元素的最长子数组
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var maxSubarrayLength = function (nums, k) {
+  const n = nums.length;
+  const map = new Map();
+  let ans = 0;
+  for (let left = 0, right = 0; right < n; right++) {
+    map.set(nums[right], (map.get(nums[right]) || 0) + 1);
+    while (map.get(nums[right]) > k) {
+      map.set(nums[left], map.get(nums[left]) - 1);
+      left++;
+    }
+    ans = Math.max(ans, right - left + 1);
+  }
+  return ans;
+};
+```
