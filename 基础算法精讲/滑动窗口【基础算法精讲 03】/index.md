@@ -116,3 +116,33 @@ var maxSubarrayLength = function (nums, k) {
   return ans;
 };
 ```
+
+# 2730. 找到最长的半重复子字符串
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestSemiRepetitiveSubstring = function (s) {
+  const n = s.length;
+  const path = [];
+  let k = 0;
+  let ans = 0;
+  for (let left = 0, right = 0; right < n; right++) {
+    path.push(s[right]);
+    if (right > 0 && s[right] === s[right - 1]) {
+      k++;
+    }
+    while (k > 1) {
+      path.shift();
+      if (s[left] === s[left + 1]) {
+        k--;
+      }
+      left++;
+    }
+    ans = Math.max(ans, right - left + 1);
+  }
+  return ans;
+};
+```
