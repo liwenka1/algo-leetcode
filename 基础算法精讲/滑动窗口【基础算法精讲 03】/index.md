@@ -196,3 +196,32 @@ var longestOnes = function (nums, k) {
   return ans;
 };
 ```
+
+# 2962. 统计最大元素出现至少 K 次的子数组
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var countSubarrays = function (nums, k) {
+  const n = nums.length;
+  const max = Math.max(...nums);
+  let cnt = 0;
+  let ans = 0;
+  for (let left = 0, right = 0; right < n; right++) {
+    if (nums[right] === max) {
+      cnt++;
+    }
+    while (cnt >= k) {
+      if (nums[left] === max) {
+        cnt--;
+      }
+      left++;
+    }
+    ans += left;
+  }
+  return ans;
+};
+```
