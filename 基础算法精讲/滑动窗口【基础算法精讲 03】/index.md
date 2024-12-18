@@ -279,3 +279,53 @@ var minOperations = function (nums, x) {
   return ans === Infinity ? -1 : ans;
 };
 ```
+
+# 76. 最小覆盖子串
+
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function (s, t) {
+  const n = s.length;
+  const m = t.length;
+  if (n < m) {
+    return "";
+  }
+  const mapT = {};
+  for (const char of t) {
+    mapT[char] = (mapT[char] || 0) + 1;
+  }
+  const mapS = {};
+  const required = Object.keys(mapT).length;
+  let cnt = 0;
+  let len = Infinity;
+  let ans = "";
+  for (let left = 0, right = 0; right < n; right++) {
+    const charRight = s[right];
+    if (mapT[charRight]) {
+      mapS[charRight] = (mapS[charRight] || 0) + 1;
+      if (mapS[charRight] === mapT[charRight]) {
+        cnt++;
+      }
+    }
+    while (cnt === required) {
+      if (right - left < len) {
+        len = right - left;
+        ans = s.substring(left, right + 1);
+      }
+      const charLeft = s[left];
+      if (mapT[charLeft]) {
+        mapS[charLeft]--;
+        if (mapS[charLeft] < mapT[charLeft]) {
+          cnt--;
+        }
+      }
+      left++;
+    }
+  }
+  return ans;
+};
+```
