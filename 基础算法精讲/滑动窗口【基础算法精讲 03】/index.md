@@ -249,3 +249,33 @@ var countSubarrays = function (nums, k) {
   return ans;
 };
 ```
+
+# 1658. 将 x 减到 0 的最小操作数
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} x
+ * @return {number}
+ */
+var minOperations = function (nums, x) {
+  const target = nums.reduce((a, b) => a + b) - x;
+  if (target < 0) {
+    return -1;
+  }
+  const n = nums.length;
+  let sum = 0;
+  let ans = Infinity;
+  for (let left = 0, right = 0; right < n; right++) {
+    sum += nums[right];
+    while (sum > target) {
+      sum -= nums[left];
+      left++;
+    }
+    if (sum === target) {
+      ans = Math.min(ans, n - right + left - 1);
+    }
+  }
+  return ans === Infinity ? -1 : ans;
+};
+```
