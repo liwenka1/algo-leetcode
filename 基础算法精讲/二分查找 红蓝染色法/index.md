@@ -28,3 +28,31 @@ var searchRange = function (nums, target) {
     : [-1, -1];
 };
 ```
+
+# 2529. 正整数和负整数的最大计数
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maximumCount = function (nums) {
+  const n = nums.length;
+  const lowerBound = (target) => {
+    let left = 0;
+    let right = n - 1;
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+      if (nums[mid] < target) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return left;
+  };
+  const start = lowerBound(0);
+  const end = lowerBound(1);
+  return Math.max(start, n - end);
+};
+```
