@@ -56,3 +56,36 @@ var maximumCount = function (nums) {
   return Math.max(start, n - end);
 };
 ```
+
+# 2300. 咒语和药水的成功对数
+
+```js
+/**
+ * @param {number[]} spells
+ * @param {number[]} potions
+ * @param {number} success
+ * @return {number[]}
+ */
+var successfulPairs = function (spells, potions, success) {
+  potions.sort((a, b) => a - b);
+  const n = potions.length;
+  const lowerBound = (spell) => {
+    let left = 0;
+    let right = n - 1;
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+      if (potions[mid] * spell < success) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return left;
+  };
+  const ans = [];
+  for (const spell of spells) {
+    ans.push(n - lowerBound(spell));
+  }
+  return ans;
+};
+```
