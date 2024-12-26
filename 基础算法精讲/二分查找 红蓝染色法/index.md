@@ -146,3 +146,30 @@ var hIndex = function (citations) {
   return n - left;
 };
 ```
+
+# 875. 爱吃香蕉的珂珂
+
+```js
+/**
+ * @param {number[]} piles
+ * @param {number} h
+ * @return {number}
+ */
+var minEatingSpeed = function (piles, h) {
+  let left = 0;
+  let right = Math.max(...piles);
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    let sum = 0;
+    for (const p of piles) {
+      sum += Math.ceil(p / mid);
+    }
+    if (sum > h) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return left;
+};
+```
