@@ -173,3 +173,31 @@ var minEatingSpeed = function (piles, h) {
   return left;
 };
 ```
+
+# 2187. 完成旅途的最少时间
+
+```js
+/**
+ * @param {number[]} time
+ * @param {number} totalTrips
+ * @return {number}
+ */
+var minimumTime = function (time, totalTrips) {
+  const min = Math.min(...time);
+  let left = 0;
+  let right = min * totalTrips;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    let sum = 0;
+    for (const t of time) {
+      sum += Math.floor(mid / t);
+    }
+    if (sum < totalTrips) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return left;
+};
+```
