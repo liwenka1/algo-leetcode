@@ -275,3 +275,39 @@ var minimizeArrayValue = function (nums) {
   return left;
 };
 ```
+
+# 2517. 礼盒的最大甜蜜度
+
+```js
+/**
+ * @param {number[]} price
+ * @param {number} k
+ * @return {number}
+ */
+var maximumTastiness = function (price, k) {
+  price.sort((a, b) => a - b);
+  const check = (mid) => {
+    let cnt = 1;
+    let pre = price[0];
+    for (const p of price) {
+      if (p >= pre + mid) {
+        cnt++;
+        pre = p;
+      }
+    }
+    return cnt;
+  };
+  const n = price.length;
+  let left = 0;
+  let right = Math.max(...price) - Math.min(...price);
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (check(mid) >= k) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return right;
+};
+```
