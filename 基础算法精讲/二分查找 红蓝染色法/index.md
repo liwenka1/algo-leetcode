@@ -201,3 +201,47 @@ var minimumTime = function (time, totalTrips) {
   return left;
 };
 ```
+
+# 2861. 最大合金数
+
+```js
+/**
+ * @param {number} n
+ * @param {number} k
+ * @param {number} budget
+ * @param {number[][]} composition
+ * @param {number[]} stock
+ * @param {number[]} cost
+ * @return {number}
+ */
+var maxNumberOfAlloys = function (n, k, budget, composition, stock, cost) {
+  const check = (num, comp) => {
+    let money = 0;
+    for (let i = 0; i < n; i++) {
+      if (stock[i] < comp[i] * num) {
+        money += (comp[i] * num - stock[i]) * cost[i];
+        if (money > budget) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const max = Math.min(...stock) + budget;
+  let ans = 0;
+  for (const comp of composition) {
+    let left = ans;
+    let right = max + 1;
+    while (left + 1 < right) {
+      const mid = Math.floor((left + right) / 2);
+      if (check(mid, comp)) {
+        left = mid;
+      } else {
+        right = mid;
+      }
+    }
+    ans = left;
+  }
+  return ans;
+};
+```
