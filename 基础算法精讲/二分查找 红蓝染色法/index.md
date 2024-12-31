@@ -245,3 +245,33 @@ var maxNumberOfAlloys = function (n, k, budget, composition, stock, cost) {
   return ans;
 };
 ```
+
+# 2439. 最小化数组中的最大值
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minimizeArrayValue = function (nums) {
+  const n = nums.length;
+  const check = (limit) => {
+    let extra = 0;
+    for (let i = n - 1; i > 0; i--) {
+      extra = Math.max(nums[i] + extra - limit, 0);
+    }
+    return nums[0] + extra <= limit;
+  };
+  let left = 0;
+  let right = Math.max(...nums);
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (check(mid)) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return left;
+};
+```
